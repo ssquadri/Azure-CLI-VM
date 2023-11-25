@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Define variables
+resourceGroupName="SSQ RG"
+location="India"
+vmName="Test-VM-SSQ-Win-10"
+adminUsername="YourAdminUsername"  # Replace with your desired admin username
+adminPassword="YourAdminPassword"  # Replace with your desired admin password
+
+# Create a resource group
+az group create --name "$resourceGroupName" --location "$location"
+
+# Create a virtual machine
+az vm create \
+  --resource-group "$resourceGroupName" \
+  --name "$vmName" \
+  --image MicrosoftWindowsDesktop:Windows-10:latest \
+  --admin-username "$adminUsername" \
+  --admin-password "$adminPassword" \
+  --location "$location" \
+  --size Standard_DS1_v2  # Choose an appropriate size
+
+# Open port 3389 for RDP access
+az vm open-port --resource-group "$resourceGroupName" --name "$vmName" --port 3389 --priority 1001
+
+# Output the public IP address of the virtual machine
+az vm show --resource-group "$resourceGroupName" --name "$vmName" --query publicIps --output tsv
