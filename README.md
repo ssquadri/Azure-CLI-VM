@@ -1,5 +1,5 @@
 # Azure-CLI-VM
-How to create a VM in azure using CLI (Cloud Shell)
+How to create a VM in azure using CLI Bash (Cloud Shell)
 
 Name of VM- Test-VM-SSQ-Win-10
 
